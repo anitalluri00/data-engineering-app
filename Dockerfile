@@ -1,4 +1,4 @@
-FROM python:3.9-slim
+FROM python:3.9-bullseye
 
 WORKDIR /app
 
@@ -27,8 +27,11 @@ RUN python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); 
 COPY src/ ./src/
 COPY config/ ./config/
 
-# Create necessary directories (instead of copying)
+# Create necessary directories
 RUN mkdir -p data/raw data/processed data/reports logs models
+
+# Set Python path
+ENV PYTHONPATH=/app
 
 # Expose port
 EXPOSE 8501
