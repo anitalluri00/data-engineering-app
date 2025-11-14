@@ -23,12 +23,11 @@ RUN python -m spacy download en_core_web_sm
 # Download NLTK data
 RUN python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('wordnet'); nltk.download('vader_lexicon')"
 
-# Copy source code
+# Copy source code and config
 COPY src/ ./src/
 COPY config/ ./config/
-COPY data/ ./data/
 
-# Create necessary directories
+# Create necessary directories (instead of copying)
 RUN mkdir -p data/raw data/processed data/reports logs models
 
 # Expose port
